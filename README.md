@@ -1,6 +1,6 @@
 # python and data analysis
 
-Welcome to the class for python and data analysis! Hope we can have a great journey on the way to master python and run the statistical analysis and econometrics together. 
+Welcome to the class for python and data analysis! Hope we can enjoy a great period together on the way to master python and run the statistical analysis and econometrics.
 
 The .ipynb files for the course will be uploaded ahead of the class
 
