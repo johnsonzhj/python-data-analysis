@@ -1,0 +1,1282 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "slide"
+    }
+   },
+   "source": [
+    "### Data import and output"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {
+    "collapsed": true,
+    "slideshow": {
+     "slide_type": "skip"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "from IPython.core.interactiveshell import InteractiveShell\n",
+    "InteractiveShell.ast_node_interactivity = \"all\"##last"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "slide"
+    }
+   },
+   "source": [
+    "#### Content of the course\n",
+    "- import and output with built-in function\n",
+    "- import and output with **pandas** and extended"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "skip"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'/Users/qiangshen/Documents/cloud/Python/course_7'"
+      ]
+     },
+     "execution_count": 25,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import os\n",
+    "os.getcwd()\n",
+    "##os.chdir('/Users/qiangshen/desktop')## \\ in windows system\n",
+    "##os.listdir()\n",
+    "## !ls"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "fragment"
+    }
+   },
+   "source": [
+    "![](http://www.onlinecomputertips.com/images/explorer.jpg)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "subslide"
+    }
+   },
+   "source": [
+    "#### File I/O operation"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "fragment"
+    }
+   },
+   "source": [
+    "- Open a file\n",
+    "- Read or write (perform operation)\n",
+    "- Close the file"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "subslide"
+    }
+   },
+   "source": [
+    "#### File I/O operation"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "fragment"
+    }
+   },
+   "source": [
+    "![](http://geospatialtraining.com/wp-content/uploads/2011/09/python_file1.png)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "subslide"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "中国是一个伟大的国家!\r\n",
+      "我热爱我的祖国!"
+     ]
+    }
+   ],
+   "source": [
+    "!cat data/example1.txt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "fragment"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'中国是一个伟大的国家!\\n我热爱我的祖国!'"
+      ]
+     },
+     "execution_count": 27,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "text=open('data/example1.txt','r')\n",
+    "text.read()\n",
+    "text.close()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "subslide"
+    }
+   },
+   "source": [
+    "![](http://images.slideplayer.com/64/11811821/slides/slide_6.jpg)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "subslide"
+    }
+   },
+   "source": [
+    "#### read and write file"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "skip"
+    }
+   },
+   "source": [
+    " ``r''   Open text file for reading.  The stream is positioned at the\n",
+    "         beginning of the file.\n",
+    "\n",
+    " ``r+''  Open for reading and writing.  The stream is positioned at the\n",
+    "         beginning of the file.\n",
+    "\n",
+    " ``w''   Truncate file to zero length or create text file for writing.\n",
+    "         The stream is positioned at the beginning of the file.\n",
+    "\n",
+    " ``w+''  Open for reading and writing.  The file is created if it does not\n",
+    "         exist, otherwise it is truncated.  The stream is positioned at\n",
+    "         the beginning of the file.\n",
+    "\n",
+    " ``a''   Open for writing.  The file is created if it does not exist.  The\n",
+    "         stream is positioned at the end of the file.  Subsequent writes\n",
+    "         to the file will always end up at the then current end of file,\n",
+    "         irrespective of any intervening fseek(3) or similar.\n",
+    "\n",
+    " ``a+''  Open for reading and writing.  The file is created if it does not\n",
+    "         exist.  The stream is positioned at the end of the file.  Subse-\n",
+    "         quent writes to the file will always end up at the then current\n",
+    "         end of file, irrespective of any intervening fseek(3) or similar."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 90,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "subslide"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\"a\",\"b\",\"c\"\r\n",
+      "\"1\",\"2\",\"3\"\r\n",
+      "\"1\",\"2\",\"3\",\"4\"\r\n"
+     ]
+    }
+   ],
+   "source": [
+    "!cat 'data/test_file.csv'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 91,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "fragment"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['\"a\",\"b\",\"c\"\\n', '\"1\",\"2\",\"3\"\\n', '\"1\",\"2\",\"3\",\"4\"\\n']"
+      ]
+     },
+     "execution_count": 91,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "f=open('data/test_file.csv','r')\n",
+    "lines=f.readlines()\n",
+    "lines"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 92,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "fragment"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\"a\",\"b\",\"c\"\n",
+      "\n",
+      "\"1\",\"2\",\"3\"\n",
+      "\n",
+      "\"1\",\"2\",\"3\",\"4\"\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "for line in lines:\n",
+    "    print(line)\n",
+    "f.close()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "subslide"
+    }
+   },
+   "source": [
+    "#### Read files"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 119,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "fragment"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "please input the file name:data/test_file.csv\n",
+      "\"a\",\"b\",\"c\"\n",
+      "\n",
+      "\"1\",\"2\",\"3\"\n",
+      "\n",
+      "\"1\",\"2\",\"3\",\"4\"\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "fname=input('please input the file name:')\n",
+    "fo=open(fname,'r')\n",
+    "for line in fo.readlines():\n",
+    "    print(line)\n",
+    "f.close()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "subslide"
+    }
+   },
+   "source": [
+    "#### Read files"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 36,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "fragment"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\"a\",\"b\",\"c\"\n",
+      "\n",
+      "\"1\",\"2\",\"3\"\n",
+      "\n",
+      "\"1\",\"2\",\"3\",\"4\"\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "f=open('data/test_file.csv','r')\n",
+    "line=f.readline()\n",
+    "while line:\n",
+    "    print(line)\n",
+    "    line=f.readline()\n",
+    "f.close() "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "subslide"
+    }
+   },
+   "source": [
+    "#### write file"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 167,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "fragment"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "13"
+      ]
+     },
+     "execution_count": 167,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Hello, World!"
+     ]
+    }
+   ],
+   "source": [
+    "f=open('data/first.txt','w')\n",
+    "f.write('Hello, World!')\n",
+    "f.close()\n",
+    "!cat data/first.txt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 175,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Hello , World!\n"
+     ]
+    }
+   ],
+   "source": [
+    "f=open('data/first.txt')\n",
+    "p1=f.read(5)\n",
+    "p2=f.read()\n",
+    "print (p1,p2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 186,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "1: 唐诗\n",
+      "2: 宋词\n",
+      "3: 元曲\n",
+      "4: Hello World2!\n",
+      "['1: 唐诗\\n', '2: 宋词\\n', '3: 元曲\\n', '4: Hello World2!\\n']\n"
+     ]
+    }
+   ],
+   "source": [
+    "! cat companies2.txt\n",
+    "f=open('companies2.txt')\n",
+    "cNames=f.readlines()\n",
+    "print(cNames)\n",
+    "f.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 96,
+   "metadata": {
+    "collapsed": true,
+    "slideshow": {
+     "slide_type": "fragment"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "%pycat test.txt"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "subslide"
+    }
+   },
+   "source": [
+    "#### write file"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 162,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "fragment"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0"
+      ]
+     },
+     "execution_count": 162,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "唐诗\n",
+      "\n",
+      "宋词\n",
+      "\n",
+      "元曲\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "fo = open('te.txt',\"w+\")\n",
+    "ls=['唐诗\\n', '宋词\\n','元曲\\n']\n",
+    "fo.writelines(ls)\n",
+    "fo.seek(0)\n",
+    "for line in fo:\n",
+    "    print(line)\n",
+    "fo.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 103,
+   "metadata": {
+    "collapsed": true,
+    "slideshow": {
+     "slide_type": "fragment"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "%pycat test.txt"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "subslide"
+    }
+   },
+   "source": [
+    "#### write file: append"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 104,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "fragment"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "14"
+      ]
+     },
+     "execution_count": 104,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "with open('test.txt','a') as f:\n",
+    "    f.write('Hello World2!\\n')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true,
+    "slideshow": {
+     "slide_type": "fragment"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "%pycat test.txt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 116,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "subslide"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "12"
+      ]
+     },
+     "execution_count": 116,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "text/plain": [
+       "23"
+      ]
+     },
+     "execution_count": 116,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "text/plain": [
+       "11"
+      ]
+     },
+     "execution_count": 116,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "text/plain": [
+       "15"
+      ]
+     },
+     "execution_count": 116,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "thelist=['Google Inc.','Microsoft Corporation.','Apple Inc.','Facebook, Inc.']\n",
+    "with open('test2.txt','w')as f:\n",
+    "    for item in thelist:\n",
+    "        f.write(\"%s\\n\" % item)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 117,
+   "metadata": {
+    "collapsed": true,
+    "slideshow": {
+     "slide_type": "fragment"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "%pycat test2.txt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "skip"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['\"a\",\"b\",\"c\"\\n', '\"1\",\"2\",\"3\"\\n', '\"1\",\"2\",\"3\",\"4\"\\n']"
+      ]
+     },
+     "execution_count": 32,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "lines"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "skip"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['The Zen of Python, by Tim Peters\\n',\n",
+       " '\\n',\n",
+       " 'Beautiful is better than ugly.\\n',\n",
+       " 'Explicit is better than implicit.\\n',\n",
+       " 'Simple is better than complex.\\n',\n",
+       " 'Complex is better than complicated.\\n',\n",
+       " 'Flat is better than nested.\\n',\n",
+       " 'Sparse is better than dense.\\n',\n",
+       " 'Readability counts.\\n',\n",
+       " \"Special cases aren't special enough to break the rules.\\n\",\n",
+       " 'Although practicality beats purity.\\n',\n",
+       " 'Errors should never pass silently.\\n',\n",
+       " 'Unless explicitly silenced.\\n',\n",
+       " 'In the face of ambiguity, refuse the temptation to guess.\\n',\n",
+       " 'There should be one-- and preferably only one --obvious way to do it.\\n',\n",
+       " \"Although that way may not be obvious at first unless you're Dutch.\\n\",\n",
+       " 'Now is better than never.\\n',\n",
+       " 'Although never is often better than *right* now.\\n',\n",
+       " \"If the implementation is hard to explain, it's a bad idea.\\n\",\n",
+       " 'If the implementation is easy to explain, it may be a good idea.\\n',\n",
+       " \"Namespaces are one honking great idea -- let's do more of those!\"]"
+      ]
+     },
+     "execution_count": 37,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "textfile=open('data/Zen.txt','rt')\n",
+    "textfile.readlines()\n",
+    "textfile.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "skip"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\"a\",\"b\",\"c\"\n",
+      "\n",
+      "\"\n",
+      "1\n",
+      "\"\n",
+      ",\n",
+      "\"\n",
+      "2\n",
+      "\"\n",
+      ",\n",
+      "\"\n",
+      "3\n",
+      "\"\n",
+      "\n",
+      "\n",
+      "\"\n",
+      "1\n",
+      "\"\n",
+      ",\n",
+      "\"\n",
+      "2\n",
+      "\"\n",
+      ",\n",
+      "\"\n",
+      "3\n",
+      "\"\n",
+      ",\n",
+      "\"\n",
+      "4\n",
+      "\"\n",
+      "\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "f=open('data/test_file.csv','r')\n",
+    "lines=f.readlines(2)\n",
+    "while lines:\n",
+    "    for line in lines:\n",
+    "        print(line)\n",
+    "    lines=f.readline(2)\n",
+    "f.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "skip"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['\"a\",\"b\",\"c\"\\n']"
+      ]
+     },
+     "execution_count": 34,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\"a\",\"b\",\"c\"\n",
+      "\n",
+      "\"\n",
+      "1\n",
+      "\"\n",
+      "2\n",
+      "\"\n",
+      "3\n",
+      "\"\n",
+      "1\n",
+      "\"\n",
+      "2\n",
+      "\"\n",
+      "3\n",
+      "\"\n",
+      "4\n"
+     ]
+    }
+   ],
+   "source": [
+    "f=open('data/test_file.csv','r')\n",
+    "lines=f.readlines(2)\n",
+    "lines\n",
+    "while lines:\n",
+    "     for line in lines:\n",
+    "        print(line)\n",
+    "        lines=f.readline(2)\n",
+    "f.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 38,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "skip"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "The Zen of Python, by Tim Peters\n",
+      "\n",
+      "\n",
+      "\n",
+      "Beautiful is better than ugly.\n",
+      "\n",
+      "Explicit is better than implicit.\n",
+      "\n",
+      "Simple is better than complex.\n",
+      "\n",
+      "Complex is better than complicated.\n",
+      "\n",
+      "Flat is better than nested.\n",
+      "\n",
+      "Sparse is better than dense.\n",
+      "\n",
+      "Readability counts.\n",
+      "\n",
+      "Special cases aren't special enough to break the rules.\n",
+      "\n",
+      "Although practicality beats purity.\n",
+      "\n",
+      "Errors should never pass silently.\n",
+      "\n",
+      "Unless explicitly silenced.\n",
+      "\n",
+      "In the face of ambiguity, refuse the temptation to guess.\n",
+      "\n",
+      "There should be one-- and preferably only one --obvious way to do it.\n",
+      "\n",
+      "Although that way may not be obvious at first unless you're Dutch.\n",
+      "\n",
+      "Now is better than never.\n",
+      "\n",
+      "Although never is often better than *right* now.\n",
+      "\n",
+      "If the implementation is hard to explain, it's a bad idea.\n",
+      "\n",
+      "If the implementation is easy to explain, it may be a good idea.\n",
+      "\n",
+      "Namespaces are one honking great idea -- let's do more of those!\n"
+     ]
+    }
+   ],
+   "source": [
+    "textfile=open('data/Zen.txt','r')\n",
+    "##textfile.readline()\n",
+    "for line in textfile.readlines():\n",
+    "    print(line)\n",
+    "textfile.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 113,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "skip"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'The Zen of Python, by Tim Peters\\n'"
+      ]
+     },
+     "execution_count": 113,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "with open('data/Zen.txt') as f:\n",
+    "    f.readline()\n",
+    " #   p2=f.read()\n",
+    "  #  print(p1,p2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 114,
+   "metadata": {
+    "scrolled": true,
+    "slideshow": {
+     "slide_type": "skip"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['I love China!hello world!hello world!']"
+      ]
+     },
+     "execution_count": 114,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "f1=open('data/text.txt','r+')\n",
+    "###f1.seek(0)\n",
+    "f1.readlines()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 115,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "skip"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "12"
+      ]
+     },
+     "execution_count": 115,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "text/plain": [
+       "[]"
+      ]
+     },
+     "execution_count": 115,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "f1.write('hello world!')\n",
+    "f1.readlines()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true,
+    "slideshow": {
+     "slide_type": "skip"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "f1.close()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 62,
+   "metadata": {
+    "collapsed": true,
+    "slideshow": {
+     "slide_type": "subslide"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "%pycat test.txt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 110,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "fragment"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "['1: 唐诗\\n', '2: 宋词\\n', '3: 元曲\\n', '4: Hello World2!\\n']\n"
+     ]
+    }
+   ],
+   "source": [
+    "with open('test.txt') as f1:\n",
+    "    p1=f1.readlines()\n",
+    "    for i in range(0,len(p1)):\n",
+    "        p1[i]=str(i+1) + ': '+ p1[i]\n",
+    "print(p1)\n",
+    "with open('companies2.txt','w') as f2:\n",
+    "    f2.writelines(p1)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 118,
+   "metadata": {
+    "collapsed": true,
+    "slideshow": {
+     "slide_type": "fragment"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "%pycat companies2.txt"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 66,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "fragment"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['1: Google Inc.\\n',\n",
+       " '2: Microsoft Corporation.\\n',\n",
+       " '3: Apple Inc.\\n',\n",
+       " '4: Facebook, Inc.\\n']"
+      ]
+     },
+     "execution_count": 66,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "p1"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "subslide"
+    }
+   },
+   "source": [
+    "#### Content of the course\n",
+    "- `open` and `close`\n",
+    "- `read` files\n",
+    "- `write` files"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 105,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "skip"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "{'a': 1, 'b': 8, 'c': 'Hello'}"
+      ]
+     },
+     "execution_count": 105,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "dic = {'a':1,'b':8, 'c':'Hello'}\n",
+    "dic"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 106,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "skip"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "dict_keys(['a', 'b', 'c'])"
+      ]
+     },
+     "execution_count": 106,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "text/plain": [
+       "dict_values([1, 8, 'Hello'])"
+      ]
+     },
+     "execution_count": 106,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "dic.keys()\n",
+    "dic.values()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 107,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "skip"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "8"
+      ]
+     },
+     "execution_count": 107,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "dic['b']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 108,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "skip"
+    }
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'NA'"
+      ]
+     },
+     "execution_count": 108,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "dic.get('d','NA')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 109,
+   "metadata": {
+    "slideshow": {
+     "slide_type": "skip"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "a : 1\n",
+      "b : 8\n",
+      "c : Hello\n"
+     ]
+    }
+   ],
+   "source": [
+    "for key in dic:\n",
+    "    print(key,\":\",dic.get(key))"
+   ]
+  }
+ ],
+ "metadata": {
+  "celltoolbar": "Slideshow",
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.5.4"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
