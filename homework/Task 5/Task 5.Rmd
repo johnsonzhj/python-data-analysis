@@ -1,0 +1,21 @@
+---
+title: "Task 5"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Given the datasets titanic.csv and titanic2.csv, please try to address the following questions with what you’ve learnt about data wrangling.
+
+1. Combining the two datasets along the vertical direction.
+
+2. Creating 2 indexes with **Sex** and **Pclass** variables.
+
+3. Exchanging the order of the levels for the 2 indexes you created in question 2.
+
+4. Sorting the data with the index **Pclass** and **Sex**.
+
+5. Getting the mean and standard devitation respectively for all the variables collapsed by indexes **Pclass** and **Sex**.
